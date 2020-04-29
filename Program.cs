@@ -6,7 +6,7 @@ using System.Linq;
 // * have Solve() return a list of PiecePlacement
 // * add a DrawSolution() function
 //  * list piece names/orientations/locations
-//  - draw grid of letters
+//  * draw grid of letters
 //  - add row/col separators between all grid cells
 //  - skip separators within pieces
 //  - use box characters
@@ -15,18 +15,39 @@ namespace DraughtboardPuzzleConsole
 {
   class Program
   {
-    private static void DrawSolution(IEnumerable<PiecePlacement> solution)
+    private static void DrawSolution(List<PiecePlacement> solution)
     {
-      foreach (var piecePlacement in solution)
+      char FindPieceNameAt(int x, int y)
       {
-        Console.WriteLine($"name: {piecePlacement.RotatedPiece.Piece.Name}; coords: ({piecePlacement.Coords.X}, {piecePlacement.Coords.Y}); orientation: {piecePlacement.RotatedPiece.Orientation}");
+        foreach (var piecePlacement in solution)
+        {
+          var xWithinPiece = x - piecePlacement.Coords.X;
+          var yWithinPiece = y - piecePlacement.Coords.Y;
+          if (xWithinPiece >= 0 && xWithinPiece < piecePlacement.RotatedPiece.Width &&
+              yWithinPiece >= 0 && yWithinPiece < piecePlacement.RotatedPiece.Height)
+          {
+            var square = piecePlacement.RotatedPiece.SquareAt(xWithinPiece, yWithinPiece);
+            if (square != null)
+            {
+              return piecePlacement.RotatedPiece.Piece.Name;
+            }
+          }
+        }
+        return '?';
+      }
+
+      foreach (var y in Enumerable.Range(0, 8))
+      {
+        var names = Enumerable.Range(0, 8).Select(x => FindPieceNameAt(x, y));
+        var line = new string(names.ToArray());
+        Console.WriteLine(line);
       }
     }
 
     static void Main(string[] args)
     {
       var solver = new Solver();
-      var solution = solver.Solve();
+      var solution = solver.Solve().ToList();
       DrawSolution(solution);
     }
   }
