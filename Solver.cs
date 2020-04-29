@@ -21,23 +21,20 @@ namespace DraughtboardPuzzleConsole
         private readonly Piece[] _pieces;
         private readonly Board _board;
         private readonly IList<InternalRow> _data = new List<InternalRow>();
-        private readonly Dlx _dlx;
 
         public Solver()
         {
-            _dlx = new Dlx();
             _pieces = Pieces.ThePieces.ToArray();
             _board = new Board(8);
             _board.ForceColourOfSquareZeroZeroToBeWhite();
         }
 
-        public void Solve()
+        public Solution Solve()
         {
             BuildMatrixAndDictionary();
-            FirstSolution = _dlx.Solve(_data, d => d, r => r.MatrixRow).First();
+            var dlx = new Dlx();
+            return dlx.Solve(_data, d => d, r => r.MatrixRow).First();
         }
-
-        public Solution FirstSolution { get; private set; }
 
         private void BuildMatrixAndDictionary()
         {
