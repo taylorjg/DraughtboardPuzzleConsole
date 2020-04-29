@@ -7,9 +7,8 @@ using System.Linq;
 // * add a DrawSolution() function
 //  * list piece names/orientations/locations
 //  * draw grid of letters
-//  - add row/col separators between all grid cells
+//  * add row/col separators between all grid cells
 //  - skip separators within pieces
-//  - use box characters
 
 namespace DraughtboardPuzzleConsole
 {
@@ -36,11 +35,13 @@ namespace DraughtboardPuzzleConsole
         return '?';
       }
 
+      Console.WriteLine(new string('-', 17));
       foreach (var y in Enumerable.Range(0, 8))
       {
         var names = Enumerable.Range(0, 8).Select(x => FindPieceNameAt(x, y));
-        var line = new string(names.ToArray());
+        var line = $"|{string.Join('|', names)}|";
         Console.WriteLine(line);
+        Console.WriteLine(new string('-', 17));
       }
     }
 
