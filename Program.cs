@@ -2,14 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-// TODO:
-// * have Solve() return a list of PiecePlacement
-// * add a DrawSolution() function
-//  * list piece names/orientations/locations
-//  * draw grid of letters
-//  * add row/col separators between all grid cells
-//  - skip separators within pieces
-
 namespace DraughtboardPuzzleConsole
 {
   class Program
@@ -35,13 +27,10 @@ namespace DraughtboardPuzzleConsole
         return '?';
       }
 
-      Console.WriteLine(new string('-', 17));
       foreach (var y in Enumerable.Range(0, 8))
       {
         var names = Enumerable.Range(0, 8).Select(x => FindPieceNameAt(x, y));
-        var line = $"|{string.Join('|', names)}|";
-        Console.WriteLine(line);
-        Console.WriteLine(new string('-', 17));
+        Console.WriteLine(string.Concat(names));
       }
     }
 
