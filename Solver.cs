@@ -29,11 +29,12 @@ namespace DraughtboardPuzzleConsole
             _board.ForceColourOfSquareZeroZeroToBeWhite();
         }
 
-        public Solution Solve()
+        public IEnumerable<PiecePlacement> Solve()
         {
             BuildMatrixAndDictionary();
             var dlx = new Dlx();
-            return dlx.Solve(_data, d => d, r => r.MatrixRow).First();
+            var solution = dlx.Solve(_data, d => d, r => r.MatrixRow).First();
+            return solution.RowIndexes.Select(rowIndex => _data[rowIndex].PiecePlacement);
         }
 
         private void BuildMatrixAndDictionary()
