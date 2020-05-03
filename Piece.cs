@@ -56,7 +56,7 @@ namespace DraughtboardPuzzleConsole
             Name = name;
         }
 
-        public char Name { get; private set; }
+        public readonly char Name;
 
         public int Width
         {

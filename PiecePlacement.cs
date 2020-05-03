@@ -1,4 +1,4 @@
-﻿namespace DraughtboardPuzzleConsole
+namespace DraughtboardPuzzleConsole
 {
     public class PiecePlacement
     {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using DlxLib;
 
@@ -26,7 +26,6 @@ namespace DraughtboardPuzzleConsole
         {
             _pieces = Pieces.ThePieces.ToArray();
             _board = new Board(8);
-            _board.ForceColourOfSquareZeroZeroToBeWhite();
         }
 
         public IEnumerable<PiecePlacement> Solve()
@@ -61,9 +60,7 @@ namespace DraughtboardPuzzleConsole
             {
                 for (var y = 0; y < _board.BoardSize; y++)
                 {
-                    _board.Reset();
-                    _board.ForceColourOfSquareZeroZeroToBeWhite();
-                    if (!_board.PlacePieceAt(rotatedPiece, x, y)) continue;
+                    if (!_board.CanPlacePieceAt(rotatedPiece, x, y)) continue;
                     var dataItem = BuildDataItem(pieceIndex, rotatedPiece, new Coords(x, y));
                     _data.Add(dataItem);
                 }

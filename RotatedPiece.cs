@@ -8,8 +8,8 @@ namespace DraughtboardPuzzleConsole
             Orientation = orientation;
         }
 
-        public Piece Piece { get; private set; }
-        public Orientation Orientation { get; private set; }
+        public readonly Piece Piece;
+        public readonly Orientation Orientation;
 
         public int Width
         {

@@ -9,8 +9,8 @@ namespace DraughtboardPuzzleConsole
             Colour = colour;
         }
 
-        public int X { get; private set; }
-        public int Y { get; private set; }
-        public Colour Colour { get; private set; }
+        public readonly int X;
+        public readonly int Y;
+        public readonly Colour Colour;
     }
 }

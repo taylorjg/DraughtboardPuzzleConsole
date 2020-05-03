@@ -1,4 +1,4 @@
-﻿namespace DraughtboardPuzzleConsole
+namespace DraughtboardPuzzleConsole
 {
     public class Coords
     {
@@ -8,7 +8,7 @@
             Y = y;
         }
 
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public readonly int X;
+        public readonly int Y;
     }
 }
